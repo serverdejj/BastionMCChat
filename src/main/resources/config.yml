@@ -11,11 +11,13 @@ chat:
 
 clan:
   enabled: true
-  # Configurar el placeholder real que exponga BastionMCClans en tu servidor.
-  placeholder: '%bastionclans_clan%'
+  # Usa la API directa de BastionMCClans para conservar el color del nombre.
+  use-direct-api: true
+  # Respaldo oficial cuando no esta disponible la API directa.
+  placeholder: '%bastionclans_colored%'
   no-clan: '&c✘'
   # Sin corchetes automaticos. Se respeta el formato devuelto por el clan.
-  format: '&e[{clan}]'
+  format: '&7[{clan}]'
   no-clan-values: ['Sin Clan', 'Sin clan', 'None', 'Ninguno', '']
 
 rankup:
@@ -88,7 +90,7 @@ chat-bubbles:
   update-ticks: 2
   replace-previous: true
   follow-player: true
-  show-to-sender: false
+  show-to-sender: true
   position:
     height: 2.8
   background:

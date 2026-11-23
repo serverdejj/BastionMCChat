@@ -51,3 +51,28 @@ Ejemplo: `/lp group vip permission set bastionchat.chatcolor true`
 - Si un plugin de clanes usa el mismo evento de chat a una prioridad posterior o no cancela el evento del chat privado, hay que integrar su API específicamente para evitar difundir mensajes de clanes. **Probar antes de producción.**
 - La burbuja es un `TextDisplay` temporal, no una GUI de chat. Palabras largas pueden superar el ancho definido.
 - Las menciones se muestran rosa en mensajes y burbujas; otras etiquetas interactivas no se muestran clicables dentro de las burbujas.
+
+
+## Cambio v1.0.1 — burbujas
+- Corrige `TextDisplay.setVisibleByDefault(false)` a `true` para que el servidor los envie normalmente al cliente.
+- `show-to-sender: true` predeterminado para probar las burbujas en tercera persona (F5).
+- Si ya existe `plugins/BastionMCChat/config.yml`, el plugin **no** lo sobrescribe: modifica ahi `chat-bubbles.show-to-sender: true` y recarga.
+- Conserva todas las opciones de fondo, altura y texto.
+
+
+## Integración con BastionMCClans (v1.0.2)
+
+Si BastionMCClans esta instalado y activado, el chat consulta directamente
+`hasClan(UUID)` y `getClanColored(UUID)` para mostrar `[NombreClan]`
+con el color configurado mediante `/clan colorname`.
+
+Si no tiene clan aparece `&c✘` sin corchetes. La consulta directa
+no necesita expansion de PlaceholderAPI. Si esa API no existe, el plugin
+usa `%bastionclans_colored%` como respaldo (requiere PlaceholderAPI).
+
+`config.yml` permite personalizar `clan.format`, `clan.no-clan`,
+`clan.placeholder` y `clan.use-direct-api`.
+
+Si ya tienes un `config.yml` de v1.0.1 no se sobreescribe: agrega
+`clan.use-direct-api: true` y cambia el placeholder manualmente si quieres
+el respaldo correcto. El modo API directa esta activado por defecto.

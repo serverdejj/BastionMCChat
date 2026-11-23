@@ -136,7 +136,7 @@ public final class BastionMCChat extends JavaPlugin implements Listener, Command
         Objects.requireNonNull(getCommand("bastionchat")).setTabCompleter(this);
         Bukkit.getPluginManager().registerEvents(this, this);
         startTasks();
-        getLogger().info("BastionMCChat 1.0.0 habilitado.");
+        getLogger().info("BastionMCChat 1.0.2 habilitado.");
     }
     @Override public void onDisable() {
         if (bubbleTask != null) bubbleTask.cancel();
@@ -243,16 +243,39 @@ public final class BastionMCChat extends JavaPlugin implements Listener, Command
     private boolean unresolved(String value) {
         return value == null || value.isBlank() || value.matches("%[^%]+%") || value.matches("\\{[^}]+\\}");
     }
+    /** Lee directamente el clan y su color desde la API publica de BastionMCClans.
+     *  Si no existe o esta desactualizada, usa el placeholder configurable. */
+    private String directClanColored(Player player) {
+        org.bukkit.plugin.Plugin clans = Bukkit.getPluginManager().getPlugin("BastionMCClans");
+        if (clans == null || !clans.isEnabled()) return null;
+        try {
+            Method hasClanMethod = clans.getClass().getMethod("hasClan", UUID.class);
+            Object hasClan = hasClanMethod.invoke(clans, player.getUniqueId());
+            if (!Boolean.TRUE.equals(hasClan)) return "";
+            Method coloredMethod = clans.getClass().getMethod("getClanColored", UUID.class);
+            Object result = coloredMethod.invoke(clans, player.getUniqueId());
+            return result instanceof String ? (String) result : "";
+        } catch (ReflectiveOperationException | SecurityException ex) {
+            // Compatibilidad con otras versiones del plugin: usar PlaceholderAPI.
+            return null;
+        }
+    }
     private Component clanComponent(Player player) {
-        String fallback = getConfig().getString("clan.no-clan", "&c✘");
         if (!getConfig().getBoolean("clan.enabled", true)) return Component.empty();
-        String value = parsePapi(player, getConfig().getString("clan.placeholder", ""));
+        String fallback = getConfig().getString("clan.no-clan", "&c✘");
+        String value = null;
+        if (getConfig().getBoolean("clan.use-direct-api", true)) {
+            value = directClanColored(player);
+        }
+        if (value == null) {
+            value = parsePapi(player, getConfig().getString("clan.placeholder", "%bastionclans_colored%"));
+        }
         boolean missing = unresolved(value);
         if (!missing) for (String empty : getConfig().getStringList("clan.no-clan-values")) {
             if (empty.equalsIgnoreCase(PLAIN.serialize(colorize(value)).trim())) { missing = true; break; }
         }
         if (missing) return colorize(fallback);
-        return colorize(getConfig().getString("clan.format", "[{clan}]").replace("{clan}", value));
+        return colorize(getConfig().getString("clan.format", "&7[{clan}]").replace("{clan}", value));
     }
     private Component rankupComponent(Player player) {
         if (!getConfig().getBoolean("rankup.enabled", true)) return Component.empty();
@@ -471,7 +494,9 @@ public final class BastionMCChat extends JavaPlugin implements Listener, Command
             d.setShadowed(true);
             d.setPersistent(false);
             d.setDefaultBackground(false);
-            d.setVisibleByDefault(false);
+            // Los TextDisplay deben estar visibles por defecto para que los clientes los rendericen.
+            // La visibilidad por distancia y la opcion de autor se controlan en updateViewers().
+            d.setVisibleByDefault(true);
             if (!getConfig().getBoolean("chat-bubbles.background.enabled", true)) {
                 d.setBackgroundColor(Color.fromARGB(0, 0, 0, 0));
             } else {
@@ -510,7 +535,7 @@ public final class BastionMCChat extends JavaPlugin implements Listener, Command
         for (Player viewer : Bukkit.getOnlinePlayers()) {
             boolean canSee = viewer.getWorld() == speaker.getWorld()
                 && viewer.getLocation().distanceSquared(speaker.getLocation()) <= maxDistance
-                && (viewer != speaker || getConfig().getBoolean("chat-bubbles.show-to-sender", false));
+                && (viewer != speaker || getConfig().getBoolean("chat-bubbles.show-to-sender", true));
             if (canSee) viewer.showEntity(this, bubble.display);
             else viewer.hideEntity(this, bubble.display);
         }

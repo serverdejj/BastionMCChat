@@ -1,6 +1,6 @@
 name: BastionMCChat
 main: mc.bastion.chat.BastionMCChat
-version: 1.0.0
+version: 1.0.2
 api-version: '1.21.11'
 author: BASTION MC
 softdepend: [PlaceholderAPI, LuckPerms, BastionMCClans, BastionMCCombat]
