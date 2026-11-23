@@ -1,0 +1,103 @@
+# BastionMCChat | todos los formatos admiten & y &#RRGGBB.
+chat:
+  enabled: true
+  format: '{clan} {rankup} {rank} &f{player} &8» {message}'
+  default-message-color: '&f'
+  cooldown-seconds: 2
+  block-duplicate-messages: true
+  duplicate-window-seconds: 15
+  # No cambia los mensajes de otros plugins: solo intercepta el chat publico.
+  ignore-cancelled: true
+
+clan:
+  enabled: true
+  # Configurar el placeholder real que exponga BastionMCClans en tu servidor.
+  placeholder: '%bastionclans_clan%'
+  no-clan: '&c✘'
+  # Sin corchetes automaticos. Se respeta el formato devuelto por el clan.
+  format: '&e[{clan}]'
+  no-clan-values: ['Sin Clan', 'Sin clan', 'None', 'Ninguno', '']
+
+rankup:
+  enabled: true
+  placeholder: ''
+  default-level: '1'
+  format: '&e[{level}✦]'
+
+rank:
+  enabled: true
+  # Prioriza el prefijo de LuckPerms por PlaceholderAPI si esta instalado.
+  # Requiere la expansion LuckPerms de PAPI. Si no esta, usa fallback.
+  placeholder: '%luckperms_prefix%'
+  fallback: '&7[DEFAULT]'
+  format: '{prefix}'
+
+chatcolor:
+  enabled: true
+  permission: 'bastionchat.chatcolor'
+  apply-to-bubbles: true
+  default-color: '&f'
+
+showcase:
+  enabled: true
+  cooldown-seconds: 10
+  expiration-seconds: 300
+  # No se anuncian ni el tiempo restante ni la expiracion.
+  show-expired-message: false
+  item:
+    enabled: true
+    aliases: ['[i]', '[item]']
+    link-format: '&#AA55FF&l[{item}]'
+    empty-format: '&7[Mano vacía]'
+    menu-title: '&#AA55FF&lObjeto de &f{player}'
+    menu-rows: 3
+    menu-slot: 13
+    fill-material: 'BLACK_STAINED_GLASS_PANE'
+  inventory:
+    enabled: true
+    aliases: ['[inv]', '[inventario]']
+    link-format: '&#55FFAA&l[Ver inventario]'
+    menu-title: '&#55FFAA&lInventario de &f{player}'
+    fill-material: 'BLACK_STAINED_GLASS_PANE'
+    include-armor: true
+    include-offhand: true
+  ping:
+    enabled: true
+    aliases: ['[p]', '[ping]']
+    format: '&a{ping}ms'
+
+mentions:
+  enabled: true
+  permission: 'bastionchat.mention'
+  format: '&d@{player}'
+  cooldown-seconds: 3
+  notify-self: false
+  allow-multiple: true
+  sound:
+    enabled: true
+    type: BLOCK_NOTE_BLOCK_PLING
+    volume: 1.0
+    pitch: 1.5
+  bubbles:
+    highlight: true
+
+chat-bubbles:
+  enabled: true
+  duration-seconds: 5
+  view-distance: 20
+  update-ticks: 2
+  replace-previous: true
+  follow-player: true
+  show-to-sender: false
+  position:
+    height: 2.8
+  background:
+    enabled: true
+    color: '#000000'
+    opacity: 65
+  text:
+    max-lines: 3
+    max-characters-per-line: 30
+    format: '{message}'
+  # Lista de mundos donde no aparecen burbujas (sensible a mayusculas).
+  disabled-worlds: []

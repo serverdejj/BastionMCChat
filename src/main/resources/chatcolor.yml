@@ -1,0 +1,41 @@
+menu:
+  title: '&#55FFFF&lColores del Chat'
+  rows: 6
+  fill:
+    enabled: true
+    material: BLACK_STAINED_GLASS_PANE
+  reset:
+    slot: 49
+    material: BARRIER
+    name: '&cRestablecer color'
+    lore:
+      - '&7Vuelve al color predeterminado.'
+colors:
+  blanco: {slot: 10, material: WHITE_WOOL, color: '&f', name: '&fBlanco'}
+  gris: {slot: 11, material: LIGHT_GRAY_WOOL, color: '&7', name: '&7Gris'}
+  gris_oscuro: {slot: 12, material: GRAY_WOOL, color: '&8', name: '&8Gris oscuro'}
+  negro: {slot: 13, material: BLACK_WOOL, color: '&0', name: '&0Negro'}
+  rojo: {slot: 14, material: RED_WOOL, color: '&c', name: '&cRojo'}
+  rojo_oscuro: {slot: 15, material: REDSTONE_BLOCK, color: '&4', name: '&4Rojo oscuro'}
+  naranja: {slot: 16, material: ORANGE_WOOL, color: '&6', name: '&6Naranja'}
+  amarillo: {slot: 19, material: YELLOW_WOOL, color: '&e', name: '&eAmarillo'}
+  verde_claro: {slot: 20, material: LIME_WOOL, color: '&a', name: '&aVerde claro'}
+  verde: {slot: 21, material: GREEN_WOOL, color: '&2', name: '&2Verde'}
+  aqua: {slot: 22, material: LIGHT_BLUE_WOOL, color: '&b', name: '&bAqua'}
+  aqua_oscuro: {slot: 23, material: CYAN_WOOL, color: '&3', name: '&3Aqua oscuro'}
+  azul: {slot: 24, material: BLUE_WOOL, color: '&9', name: '&9Azul'}
+  azul_oscuro: {slot: 25, material: LAPIS_BLOCK, color: '&1', name: '&1Azul oscuro'}
+  rosa: {slot: 28, material: PINK_WOOL, color: '&d', name: '&dRosa'}
+  morado: {slot: 29, material: PURPLE_WOOL, color: '&5', name: '&5Morado'}
+  rosa_claro: {slot: 30, material: PINK_STAINED_GLASS, color: '&#FF9AD5', name: '&#FF9AD5Rosa claro'}
+  durazno: {slot: 31, material: ORANGE_STAINED_GLASS, color: '&#FFAA88', name: '&#FFAA88Durazno'}
+  dorado: {slot: 32, material: GOLD_BLOCK, color: '&#FFD700', name: '&#FFD700Dorado'}
+  lima: {slot: 33, material: LIME_STAINED_GLASS, color: '&#7CFC00', name: '&#7CFC00Lima'}
+  celeste: {slot: 34, material: LIGHT_BLUE_STAINED_GLASS, color: '&#87CEFA', name: '&#87CEFACeleste'}
+  coral: {slot: 37, material: RED_STAINED_GLASS, color: '&#FF7F50', name: '&#FF7F50Coral'}
+  violeta: {slot: 38, material: PURPLE_STAINED_GLASS, color: '&#B76EFF', name: '&#B76EFFVioleta'}
+  crema: {slot: 39, material: WHITE_STAINED_GLASS, color: '&#FFF1C1', name: '&#FFF1C1Crema'}
+  cafe: {slot: 40, material: BROWN_WOOL, color: '&#8B4513', name: '&#8B4513Cafe'}
+  turquesa: {slot: 41, material: CYAN_STAINED_GLASS, color: '&#00B3B3', name: '&#00B3B3Turquesa'}
+  menta: {slot: 42, material: LIME_CONCRETE, color: '&#8AFFA5', name: '&#8AFFA5Menta'}
+  fucsia: {slot: 43, material: MAGENTA_WOOL, color: '&#FF1493', name: '&#FF1493Fucsia'}

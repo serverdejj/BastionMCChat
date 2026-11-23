@@ -1,0 +1,32 @@
+name: BastionMCChat
+main: mc.bastion.chat.BastionMCChat
+version: 1.0.0
+api-version: '1.21.11'
+author: BASTION MC
+softdepend: [PlaceholderAPI, LuckPerms, BastionMCClans, BastionMCCombat]
+description: Chat, colores, inventarios compartidos, menciones y burbujas.
+commands:
+  chatcolor:
+    description: Abre el menu de colores o restaura el color predeterminado.
+    usage: /chatcolor [reset]
+    permission: bastionchat.chatcolor
+  bastionchat:
+    description: Administracion y visualizaciones del chat.
+    usage: /bastionchat reload
+    aliases: [bchat]
+permissions:
+  bastionchat.chatcolor:
+    description: Permite usar /chatcolor.
+    default: false
+  bastionchat.showitem:
+    default: true
+  bastionchat.showinventory:
+    default: true
+  bastionchat.showping:
+    default: true
+  bastionchat.mention:
+    default: true
+  bastionchat.bypass.cooldown:
+    default: op
+  bastionchat.admin.reload:
+    default: op
